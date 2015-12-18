@@ -1,48 +1,48 @@
-#N canvas 74 22 1028 723 10;
-#X obj 76 301 hsl 128 15 0 136 0 1 empty empty empty -2 -8 0 10 -262144
--1 -1 7400 1;
-#X obj 120 387 + 100;
-#X obj 120 411 dbtorms;
-#X msg 73 544 \$1 100;
-#X obj 73 568 line~;
-#X msg 120 544 \$1 100;
-#X obj 120 568 line~;
-#X floatatom 120 440 5 0 0 0 - - -, f 5;
-#X text 170 432 Q - refers to resonance for lowpass \, highpass \,
+#N canvas 74 22 1028 752 10;
+#X obj 76 292 hsl 128 15 0 136 0 1 empty empty empty -2 -8 0 10 -262144
+-1 -1 10800 1;
+#X obj 120 359 + 100;
+#X obj 120 383 dbtorms;
+#X msg 73 484 \$1 100;
+#X obj 73 508 line~;
+#X msg 120 484 \$1 100;
+#X obj 120 508 line~;
+#X floatatom 120 412 5 0 0 0 - - -, f 5;
+#X text 170 404 Q - refers to resonance for lowpass \, highpass \,
 and resonant. Refers to bandwidth for bandpass \, notch \, peaking
 \, and allpass. Refers to slope for highshelf and lowshelf.;
-#X text 184 351 The gain of the resonance is equal to Q. By convention
+#X text 184 323 The gain of the resonance is equal to Q. By convention
 \, -3dB means no resonance for lowpass and highpass.;
-#X obj 120 358 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
--262144 -1 -1 -1 256;
-#X obj 167 522 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
--262144 -1 -1 16 256;
-#X text 230 521 Gain (in dB) for peaking \, lowshelf \, and highshelf
+#X obj 120 330 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
+-262144 -1 -1 47 256;
+#X obj 167 462 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
+-262144 -1 -1 17 256;
+#X text 230 461 Gain (in dB) for peaking \, lowshelf \, and highshelf
 ;
-#X obj 73 322 mtof;
-#X msg 167 544 \$1 100;
-#X obj 167 568 line~;
-#X obj 40 259 noise~;
+#X obj 73 313 mtof;
+#X msg 167 484 \$1 100;
+#X obj 167 508 line~;
+#X obj 40 250 noise~;
 #X obj 19 16 cnv 15 400 60 empty empty empty 20 12 0 14 -191765 -66577
 0;
 #X text 27 23 [omniFilter_abs~]: vanilla abstraction which packs the
 [filtercoeff.mmb~] and [biquad.mmb~] abstractions by Mike-Moser Booth
 \, into one package.;
-#X obj 40 635 *~ 0.2;
-#X obj 40 677 dac~;
-#X msg 572 414 lowpass;
-#X msg 572 434 highpass;
-#X msg 572 534 lowshelf;
-#X msg 572 554 highshelf;
-#X msg 572 454 bandpass;
-#X msg 572 474 resonant;
-#X msg 572 494 notch;
-#X msg 572 514 peaking;
-#X msg 572 574 allpass;
-#X text 565 393 filter types;
-#X obj 572 596 t a;
-#X obj 40 613 omniFilter_abs~ lowpass;
-#X text 72 282 frequency;
+#X obj 40 575 *~ 0.2;
+#X obj 40 617 dac~;
+#X msg 572 354 lowpass;
+#X msg 572 374 highpass;
+#X msg 572 474 lowshelf;
+#X msg 572 494 highshelf;
+#X msg 572 394 bandpass;
+#X msg 572 414 resonant;
+#X msg 572 434 notch;
+#X msg 572 454 peaking;
+#X msg 572 514 allpass;
+#X text 565 333 filter types;
+#X obj 572 536 t a;
+#X obj 40 553 omniFilter_abs~ lowpass;
+#X text 72 273 frequency;
 #X text 545 32 Arguments: filter type (default is lowpass);
 #X text 544 55 Inlets:;
 #X text 585 78 1st (signal): signal to be filtered;
@@ -64,6 +64,61 @@ by 2 Pi \, whereas [expr~ cos($v1)] does not \, and this creates a
 conflict with the angular frequency;
 #X text 711 616 TODO: find a way not to use [expr~] at all.;
 #X text 712 652 Put together by Alexandros Drymonitis;
+#N canvas 0 22 775 444 scope 0;
+#N canvas 0 22 450 278 (subpatch) 0;
+#X array scope 1024 float 0;
+#X coords 0 1 1023 0 200 140 2 0 0;
+#X restore 100 100 graph;
+#X obj 346 99 inlet~;
+#X obj 469 200 loadbang;
+#X obj 346 170 rfft~;
+#X obj 346 203 *~;
+#X obj 373 203 *~;
+#X obj 346 232 sqrt~;
+#X obj 346 255 biquad~ 0 0 0 0 1;
+#X obj 346 340 tabwrite~ scope;
+#X obj 469 222 t b b;
+#X obj 469 266 pow -1;
+#X obj 346 147 *~;
+#X obj 397 20 loadbang;
+#X obj 397 42 samplerate~;
+#X obj 397 64 / 1024;
+#X obj 572 104 block~ 2048 4;
+#X obj 397 86 osc~;
+#X obj 481 47 bang~;
+#X obj 481 69 0.5;
+#X obj 397 108 *~ 0.5;
+#X obj 397 130 +~ 0.5;
+#X obj 496 293 metro 250;
+#X obj 346 283 *~ 1;
+#X msg 469 244 64;
+#X connect 1 0 11 0;
+#X connect 2 0 9 0;
+#X connect 3 0 4 0;
+#X connect 3 0 4 1;
+#X connect 3 1 5 0;
+#X connect 3 1 5 1;
+#X connect 4 0 6 0;
+#X connect 5 0 6 0;
+#X connect 6 0 7 0;
+#X connect 7 0 22 0;
+#X connect 9 0 23 0;
+#X connect 9 1 21 0;
+#X connect 10 0 22 1;
+#X connect 11 0 3 0;
+#X connect 12 0 13 0;
+#X connect 13 0 14 0;
+#X connect 14 0 16 0;
+#X connect 16 0 19 0;
+#X connect 17 0 18 0;
+#X connect 18 0 16 1;
+#X connect 19 0 20 0;
+#X connect 20 0 11 1;
+#X connect 21 0 8 0;
+#X connect 22 0 8 0;
+#X connect 23 0 10 0;
+#X coords 0 -1 1 1 200 140 2 100 100;
+#X restore 107 592 pd scope;
 #X connect 0 0 13 0;
 #X connect 1 0 2 0;
 #X connect 2 0 7 0;
@@ -80,6 +135,7 @@ conflict with the angular frequency;
 #X connect 16 0 32 0;
 #X connect 19 0 20 0;
 #X connect 19 0 20 1;
+#X connect 19 0 46 0;
 #X connect 21 0 31 0;
 #X connect 22 0 31 0;
 #X connect 23 0 31 0;
