@@ -36,7 +36,6 @@
 #X text 29 112 The comments next to the slider and number atoms below
 are copied from the help patch of the [filtercoeff.mmb~] abstraction.
 ;
-#X text 897 637 TODO: find a way not to use [expr~] at all.;
 #X text 898 653 Put together by Alexandros Drymonitis;
 #X obj 30 553 multiFilter_abs~ lowpass;
 #X obj 592 596 s filt_type;
@@ -62,7 +61,7 @@ are copied from the help patch of the [filtercoeff.mmb~] abstraction.
 #X obj 633 517 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X msg 698 455 allpass \$1;
-#X obj 698 436 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 698 436 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 27 23 [multiFilter_abs~]: vanilla abstraction which packs the
 [filtercoeff.mmb~] and [biquad.mmb~] abstractions by Mike-Moser Booth
@@ -168,44 +167,44 @@ allpass. Refers to slope for highshelf and lowshelf.;
 #X connect 1 0 2 0;
 #X connect 2 0 7 0;
 #X connect 3 0 4 0;
-#X connect 4 0 29 1;
+#X connect 4 0 28 1;
 #X connect 5 0 6 0;
-#X connect 6 0 29 2;
+#X connect 6 0 28 2;
 #X connect 7 0 5 0;
 #X connect 9 0 1 0;
 #X connect 10 0 13 0;
 #X connect 12 0 3 0;
 #X connect 13 0 14 0;
-#X connect 14 0 29 3;
-#X connect 15 0 29 0;
+#X connect 14 0 28 3;
+#X connect 15 0 28 0;
 #X connect 17 0 18 0;
 #X connect 17 0 18 1;
-#X connect 29 0 55 0;
-#X connect 29 1 56 0;
-#X connect 29 2 57 0;
-#X connect 29 3 62 0;
-#X connect 29 4 60 0;
-#X connect 29 5 68 0;
-#X connect 29 6 61 0;
-#X connect 29 7 58 0;
-#X connect 31 0 29 4;
-#X connect 32 0 30 0;
-#X connect 33 0 30 0;
+#X connect 28 0 54 0;
+#X connect 28 1 55 0;
+#X connect 28 2 56 0;
+#X connect 28 3 61 0;
+#X connect 28 4 59 0;
+#X connect 28 5 67 0;
+#X connect 28 6 60 0;
+#X connect 28 7 57 0;
+#X connect 30 0 28 4;
+#X connect 31 0 29 0;
+#X connect 32 0 29 0;
+#X connect 33 0 31 0;
 #X connect 34 0 32 0;
-#X connect 35 0 33 0;
-#X connect 36 0 37 0;
-#X connect 37 0 30 0;
-#X connect 38 0 30 0;
-#X connect 39 0 38 0;
-#X connect 40 0 69 0;
-#X connect 41 0 30 0;
-#X connect 42 0 41 0;
-#X connect 43 0 30 0;
-#X connect 44 0 43 0;
-#X connect 45 0 30 0;
-#X connect 46 0 45 0;
-#X connect 63 0 17 0;
-#X connect 63 0 66 0;
-#X connect 64 0 65 0;
-#X connect 65 0 63 0;
-#X connect 69 0 30 0;
+#X connect 35 0 36 0;
+#X connect 36 0 29 0;
+#X connect 37 0 29 0;
+#X connect 38 0 37 0;
+#X connect 39 0 68 0;
+#X connect 40 0 29 0;
+#X connect 41 0 40 0;
+#X connect 42 0 29 0;
+#X connect 43 0 42 0;
+#X connect 44 0 29 0;
+#X connect 45 0 44 0;
+#X connect 62 0 17 0;
+#X connect 62 0 65 0;
+#X connect 63 0 64 0;
+#X connect 64 0 62 0;
+#X connect 68 0 29 0;
