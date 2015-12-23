@@ -1,45 +1,45 @@
 #N canvas 74 22 1004 710 10;
-#X obj 76 232 hsl 128 15 0 136 0 1 empty empty empty -2 -8 0 10 -262144
+#X obj 73 225 hsl 128 15 0 136 0 1 empty empty empty -2 -8 0 10 -262144
 -1 -1 10300 1;
-#X obj 120 299 + 100;
-#X obj 120 323 dbtorms;
-#X msg 73 424 \$1 100;
-#X obj 73 448 line~;
-#X msg 120 424 \$1 100;
-#X obj 120 448 line~;
-#X floatatom 120 352 5 0 0 0 - - -, f 5;
-#X text 170 344 Q - refers to resonance for lowpass \, highpass \,
+#X obj 117 292 + 100;
+#X obj 117 316 dbtorms;
+#X msg 70 417 \$1 100;
+#X obj 70 441 line~;
+#X msg 117 417 \$1 100;
+#X obj 117 441 line~;
+#X floatatom 117 345 5 0 0 0 - - -, f 5;
+#X text 167 337 Q - refers to resonance for lowpass \, highpass \,
 and resonant. Refers to bandwidth for bandpass \, notch \, peaking
 \, and allpass. Refers to slope for highshelf and lowshelf.;
-#X text 184 263 The gain of the resonance is equal to Q. By convention
+#X text 181 256 The gain of the resonance is equal to Q. By convention
 \, -3dB means no resonance for lowpass and highpass.;
-#X obj 120 270 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
+#X obj 117 263 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
 -262144 -1 -1 -3 256;
-#X obj 167 402 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
+#X obj 164 395 nbx 5 14 -1e+37 1e+37 0 1 empty empty empty 0 -8 0 10
 -262144 -1 -1 0 256;
-#X text 230 401 Gain (in dB) for peaking \, lowshelf \, and highshelf
+#X text 227 394 Gain (in dB) for peaking \, lowshelf \, and highshelf
 ;
-#X obj 73 253 mtof;
-#X msg 167 424 \$1 100;
-#X obj 167 448 line~;
-#X obj 40 190 noise~;
-#X obj 19 16 cnv 15 400 60 empty empty empty 20 12 0 14 -191765 -66577
+#X obj 70 246 mtof;
+#X msg 164 417 \$1 100;
+#X obj 164 441 line~;
+#X obj 37 183 noise~;
+#X obj 25 16 cnv 15 400 60 empty empty empty 20 12 0 14 -191765 -66577
 0;
-#X text 27 23 [omniFilter_abs~]: vanilla abstraction which packs the
+#X text 33 23 [omniFilter_abs~]: vanilla abstraction which packs the
 [filtercoeff.mmb~] and [biquad.mmb~] abstractions by Mike-Moser Booth
 \, into one package.;
-#X obj 40 515 *~ 0.2;
-#X obj 40 557 dac~;
-#X msg 572 294 lowpass;
-#X msg 572 314 highpass;
-#X msg 572 374 lowshelf;
-#X msg 572 414 highshelf;
-#X msg 572 334 bandpass;
-#X msg 572 435 resonant;
-#X msg 572 354 allpass;
-#X text 565 273 filter types;
-#X obj 572 476 t a;
-#X text 72 213 frequency;
+#X obj 37 519 *~ 0.2;
+#X obj 37 550 dac~;
+#X msg 569 287 lowpass;
+#X msg 569 307 highpass;
+#X msg 569 367 lowshelf;
+#X msg 569 407 highshelf;
+#X msg 569 327 bandpass;
+#X msg 569 428 resonant;
+#X msg 569 347 allpass;
+#X text 562 266 filter types;
+#X obj 569 469 t a;
+#X text 69 206 frequency;
 #X text 545 32 Arguments: filter type (default is lowpass);
 #X text 544 55 Inlets:;
 #X text 585 78 1st (signal): signal to be filtered;
@@ -50,7 +50,7 @@ and resonant. Refers to bandwidth for bandpass \, notch \, peaking
 ;
 #X text 585 139 5th (cotrol): filter type;
 #X text 550 166 Outlet: filtered signal;
-#X text 33 129 The comments next to the slider and number atoms below
+#X text 30 122 The comments next to the slider and number atoms below
 are copied from the help patch of the [filtercoeff.mmb~] abstraction.
 ;
 #X text 712 652 Put together by Alexandros Drymonitis;
@@ -108,17 +108,11 @@ are copied from the help patch of the [filtercoeff.mmb~] abstraction.
 #X connect 22 0 8 0;
 #X connect 23 0 10 0;
 #X coords 0 -1 1 1 200 140 2 100 100;
-#X restore 87 549 pd scope;
-#X msg 572 394 peaknotch;
-#X obj 40 493 omniFilter_abs~ lowpass;
-#N canvas 0 22 450 300 info 0;
-#X text 36 62 This abstraction packs [filtercoeff.mmb~] and [biquad.mmb~]
-abstractions by Mike-Moser Booth omiting the use of [expr~] completely.
-There seems to be a strange click in the allpass filter when the frequency
-goes from MIDI 128 to 129 or the other way around \, probably because
-of the hyperbolic sine implementation \, but I'm not sure. I'll see
-how I can solve that.;
-#X restore 34 97 pd info;
+#X restore 84 542 pd scope;
+#X msg 569 387 peaknotch;
+#X obj 37 486 omniFilter_abs~ lowpass;
+#X text 31 88 This abstraction omits the use of [expr~] completely
+using only native Pd-vanilla objects;
 #X connect 0 0 13 0;
 #X connect 1 0 2 0;
 #X connect 2 0 7 0;
@@ -135,7 +129,6 @@ how I can solve that.;
 #X connect 16 0 43 0;
 #X connect 19 0 20 0;
 #X connect 19 0 20 1;
-#X connect 19 0 41 0;
 #X connect 21 0 29 0;
 #X connect 22 0 29 0;
 #X connect 23 0 29 0;
@@ -146,3 +139,4 @@ how I can solve that.;
 #X connect 29 0 43 4;
 #X connect 42 0 29 0;
 #X connect 43 0 19 0;
+#X connect 43 0 41 0;
